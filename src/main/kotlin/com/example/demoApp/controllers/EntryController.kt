@@ -38,7 +38,6 @@ class EntryController {
     }
 
     @PutMapping("id/{id}")
-//    @PutMapping("id/{id}")
     fun updateById(@PathVariable id: ObjectId, @RequestBody newEntry: DataModel): ResponseEntity<String> {
         val oldEntry = serviceEntry.getById(id).orElse(null)
         return if (oldEntry != null) {
