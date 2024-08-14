@@ -1,4 +1,4 @@
-package com.example.demoApp.controllers
+package com.example.demoApp.entity
 
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.mapping.Document

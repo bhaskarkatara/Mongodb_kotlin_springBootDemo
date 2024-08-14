@@ -1,5 +1,6 @@
 package com.example.demoApp.controllers
 
+import com.example.demoApp.entity.DataModel
 import com.example.demoApp.service.ServiceEntry
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
