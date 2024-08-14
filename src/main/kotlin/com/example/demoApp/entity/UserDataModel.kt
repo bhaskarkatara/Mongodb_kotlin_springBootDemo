@@ -24,6 +24,6 @@ data class UserDataModel(
      var password : String,
 
      @DBRef
-    var journalEntries : List<DataModel> = listOf()
+    var journalEntries : MutableList<DataModel> = mutableListOf()
 
 )

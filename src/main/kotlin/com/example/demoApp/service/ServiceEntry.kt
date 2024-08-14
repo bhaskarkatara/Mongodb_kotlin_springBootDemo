@@ -14,11 +14,27 @@ class ServiceEntry {
     @Autowired
     lateinit var  demoEntryRepo: DemoEntryRepo
 
-    fun saveEntries(entry: DataModel): DataModel = demoEntryRepo.save(entry)
+    @Autowired
+    lateinit var userService: userService
+
+    fun saveEntries(entry: DataModel, userName: String){
+        val user = userService.findByUserName(userName)
+       val saved =  demoEntryRepo.save(entry)
+        user.journalEntries.add(saved)
+        userService.saveEntries(user)
+    }
 
     fun getAll(): List<DataModel> = demoEntryRepo.findAll()
 
     fun getById(id: ObjectId): Optional<DataModel> = demoEntryRepo.findById(id)
 
-    fun deleteById(id: ObjectId) = demoEntryRepo.deleteById(id)
+    fun deleteById(id: ObjectId, userName: String) {
+        val user = userService.findByUserName(userName)
+        // Remove the entry with the given id from the user's journalEntries list
+        user.journalEntries.removeIf { it.id == id }
+        // Save the updated user object to persist the change
+        userService.saveEntries(user)
+        // Delete the entry from the demoEntryRepo by its id
+        demoEntryRepo.deleteById(id)
+    }
 }
