@@ -6,5 +6,5 @@ import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.MongoRepository
 
 interface userRepo: MongoRepository<UserDataModel,ObjectId>  {
-
+    fun findByUserName(userName : String) : UserDataModel
 }

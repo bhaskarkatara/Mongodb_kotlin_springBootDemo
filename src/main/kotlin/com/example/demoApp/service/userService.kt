@@ -26,4 +26,8 @@ class userService {
     fun getById(id: ObjectId): Optional<UserDataModel> = userRepo.findById(id)
 
     fun deleteById(id: ObjectId) = userRepo.deleteById(id)
+
+    fun findByUserName(userName : String):UserDataModel{
+     return userRepo.findByUserName(userName)
+    }
 }
