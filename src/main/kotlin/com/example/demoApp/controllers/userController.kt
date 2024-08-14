@@ -13,7 +13,7 @@ import java.util.*
 class userController {
 
     @Autowired
-    lateinit var userService: userService
+    lateinit var userService : userService
 
     @GetMapping
     fun getAllUser() : List<UserDataModel>{
@@ -22,12 +22,18 @@ class userController {
 
     @PostMapping
     fun createUser(@RequestBody user: UserDataModel): ResponseEntity<String> {
-        userService.saveEntries(user)
-        return ResponseEntity("User created successfully", HttpStatus.CREATED)
+        try{
+            userService.saveEntries(user)
+            return ResponseEntity("User created successfully", HttpStatus.CREATED)
+        }catch (e:Exception){
+            return ResponseEntity("error",HttpStatus.BAD_REQUEST)
+        }
+
     }
-    @PutMapping
-    fun updateUser(@RequestBody user: UserDataModel): ResponseEntity<String> {
-        val userInDb = userService.findByUserName(user.userName)
+    @PutMapping("{userName}")
+
+    fun updateUser(@RequestBody user: UserDataModel,@PathVariable userName:String): ResponseEntity<String> {
+        val userInDb = userService.findByUserName(userName)
         return run {
             userInDb.userName = user.userName
             userInDb.password = user.password
@@ -35,6 +41,7 @@ class userController {
             ResponseEntity("User updated successfully", HttpStatus.OK)
         }
     }
+
 
 
 }

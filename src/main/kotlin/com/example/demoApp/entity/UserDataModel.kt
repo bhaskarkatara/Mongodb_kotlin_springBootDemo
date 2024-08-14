@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.index.Indexed
 //@Metadata
 data class UserDataModel(
     @Id
-     var id : ObjectId,
+    var id: ObjectId = ObjectId.get(),
 
     @Indexed(unique = true)
     @NotNull
