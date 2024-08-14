@@ -50,18 +50,18 @@ class EntryController {
       return serviceEntry.getById(myId)
     }
 
-//    @PutMapping("id/{id}")
-//    fun updateById(@PathVariable id: ObjectId, @RequestBody newEntry: DataModel): ResponseEntity<String> {
-//        val oldEntry = serviceEntry.getById(id).orElse(null)
-//        return if (oldEntry != null) {
-//            oldEntry.name = newEntry.name.ifEmpty { oldEntry.name }
-//            oldEntry.content = newEntry.content
-//            serviceEntry.saveEntries(oldEntry, user) // Save the updated entry
-//            ResponseEntity("Entry updated successfully", HttpStatus.OK)
-//        } else {
-//            ResponseEntity("Entry not found", HttpStatus.NOT_FOUND)
-//        }
-//    }
+    @PutMapping("id/{userName}{id}")
+    fun updateById(@PathVariable id: ObjectId, @RequestBody newEntry: DataModel,@PathVariable userName: String): ResponseEntity<String> {
+        val oldEntry = serviceEntry.getById(id).orElse(null)
+        return if (oldEntry != null) {
+            oldEntry.name = newEntry.name.ifEmpty { oldEntry.name }
+            oldEntry.content = newEntry.content
+            serviceEntry.saveEntries(oldEntry) // Save the updated entry
+             ResponseEntity("Entry updated successfully", HttpStatus.OK)
+        } else {
+          ResponseEntity("Entry not found", HttpStatus.NOT_FOUND)
+        }
+    }
 
 
     @DeleteMapping("id/{userName}{myId}")

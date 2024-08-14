@@ -23,6 +23,12 @@ class ServiceEntry {
         user.journalEntries.add(saved)
         userService.saveEntries(user)
     }
+    fun saveEntries(entry: DataModel){
+//        val user = userService.findByUserName(userName)
+//        val saved =  demoEntryRepo.save(entry)
+//        user.journalEntries.add(saved)
+        demoEntryRepo.save(entry)
+    }
 
     fun getAll(): List<DataModel> = demoEntryRepo.findAll()
 
