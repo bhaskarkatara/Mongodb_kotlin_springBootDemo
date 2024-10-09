@@ -17,7 +17,7 @@ class EntryController {
       // controller -- > service --> repo
     // (just like android, Compose --->viewModel ---> repo )
 
-    @Autowired
+    @Autowired // this is used for dependency injection
     lateinit var serviceEntry : ServiceEntry
 
     @Autowired
